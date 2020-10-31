@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+<!--body content start-->
+
+<div class="page-content">
+
+<!--login start-->
+
+<section class="bg-light register">
+  <div class="container">
+<div class="row justify-content-center text-center">
+  <div class="col-10 col-lg-7 col-md-9 shadow p-6 bg-white">
+{% if user.is_authenticated %}
+{% comment %} <a href="{% url 'home' %}" class="btn btn-success">Go To Shopping</a> {% endcomment %}
+<script>
+window.location.href='/'
+</script>
+{% else %}
+
+   <div class="col-lg-12 col-md-12 p-0">
+        <div class="mb-6">
+           <h2 class="font-w-6">Login</h2>
+        </div>
+        </div>
+      <div class="col-lg-12 col-md-12 ml-auto mr-auto p-0">
+        <div class="register-form text-center">
+          <form method="post" action="/userlogin/">
+          {% csrf_token %}
+            {{form|crispy}}
+                <input type="submit" class="btn btn-success" value="Login">
+            <div class="row">
+              <div class="col-md-12">
+                <span class="mt-4 d-block">New Customer ? <a href="{% url 'signup' %}">Register</a></span>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+{% endif %}
+    </div>
+  </div>
+</section>
+
+</div>
+{% endblock body %}

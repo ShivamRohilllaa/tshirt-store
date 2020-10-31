@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta name="keywords" content="bootstrap 4, premium, multipurpose, ecommerce, html5, css" />
+<meta name="description" content="Bootstrap 4 Landing Page Template" />
+<meta name="author" content="www.themesground.com" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Title -->
+<title>{% block title %}
+{% endblock title %}</title>
+
+<!-- Favicon Icon -->
+<link rel="shortcut icon" href="sta images/favicon.png" />
+
+<!-- inject css start -->
+
+<link href="{% static 'css/theme-plugin.css' %}" rel="stylesheet" />
+<link href="{% static 'css/theme.min.css' %}" rel="stylesheet" />
+
+<!-- inject css end -->
+
+</head>
+
+<body>
+
+<!-- page wrapper start -->
+
+<div class="page-wrapper"> 
+  
+  <!-- preloader start -->
+  
+  <div id="ht-preloader">
+    <div class="loader clear-loader"> <img class="img-fluid" src="sta images/loader.gif" alt=""> </div>
+  </div>
+  
+  <!-- preloader end --> 
+  
+  <!--header start-->
+  
+  {% include 'header.html' %}
+  {% block body %}
+
+  {% endblock body %}
+{% include 'footer.html' %}
+  <div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<!--back-to-top end--> 
+
+<!-- inject js start --> 
+
+<script src=" {% static 'js/jquery-3.5.1.min.js' %}"></script> 
+<script src=" {% static 'js/popper.min.js' %}"></script> 
+<script src=" {% static 'js/bootstrap.min.js' %}"></script> 
+<script src=" {% static 'js/owl.carousel.min.js' %}"></script> 
+<script src=" {% static 'js/light-slider.js' %}"></script> 
+<script src=" {% static 'js/parallax.js' %}"></script> 
+<script src=" {% static 'js/magnific-popup.min.js' %}"></script> 
+<script src=" {% static 'js/jquery.countdown.min.js' %}"></script> 
+<script src=" {% static 'js/jquery.dd.min.js' %}"></script> 
+<script src=" {% static 'js/validator.js' %}"></script> 
+<script src=" {% static 'js/wow.js' %}"></script> 
+<script src=" {% static 'js/theme-script.js' %}"></script> 
+
+</body>
+</html>

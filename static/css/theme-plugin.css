@@ -1,0 +1,30 @@
+/* ------------------------------------------------
+Theme Name: Flipmarto
+Author:  ThemesGround
+Description:  Flipmarto HTML Template
+Tags: two-columns, left-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu
+Text Domain:  Flipmarto
+------------------------------------------------ */
+
+/* ------------------------
+    Table of Css
+
+  1. Bootstrap
+  2. Animate
+  3. Line Awesome
+  4. ionicons
+  5. Owl Carousel
+  6. Lightslider  
+  7. Spacing
+  8. all.min
+ ------------------------ */
+
+@import 'bootstrap.min.css';
+@import 'animate.css';
+@import 'line-awesome.min.css';
+@import 'ionicons.min.css';
+@import 'owl.carousel.css';
+@import 'lightslider.min.css';
+@import 'spacing.css';
+@import 'all.min.css';
+
