@@ -58,8 +58,10 @@
         <div class="product-details">
           <h1 class="h4 mb-0 font-w-6">{{details.name|title}}</h1>
           <div class="star-rating mb-4"><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i>
-          </div> <span class="product-price h5 text-pink">Rs. {% discount details %} <del class="text-muted h6">Rs. {% prices details %}</del></span>
+          </div> <span class="product-price h5 text-pink">Rs.  {{sell_price}} <del class="text-muted h6">Rs. {{price}}</del></span>
           <ul class="list-unstyled my-3">
+            <li><small>Discount: <span class="text-red"> <strong> {{details.discount}}%</strong></span> </small>
+            </li>
             <li><small>Availibility: <span class="text-green"> In Stock</span> </small>
             </li>
             <li class="font-w-4"><small>Categories :<span class="text-muted"> womens, clothing, dresses, footwear</span></small>
@@ -68,22 +70,18 @@
           <p class="mb-4 desc">{{details.desc}}</p>
           <div class="d-sm-flex align-items-center mb-5">
             <div class="d-flex align-items-center mr-sm-4">
-              <button class="btn-product btn-product-up"> <i class="las la-minus"></i>
-              </button>
-              <input class="form-product" type="number" name="form-product" value="1">
-              <button class="btn-product btn-product-down"> <i class="las la-plus"></i>
-              </button>
-            </div>
-            <select class="custom-select mt-3 mt-sm-0" id="inputGroupSelect02">
-              <option selected>Size</option>
-              {% for size in tshirt.sizevariant_set.all %}
-              <option value="1">{{size.size}}</option>
+              {% for size in details.sizevariant_set.all %}
+              <p>
+              <a href="{% url 'product_detail' details.slug %}?size={{size.size}}" style="color:#fff;">
+              <button class="btn btn-small btn-{% get_active_size_btn_class active_size size %} mx-2">
+              {{size.size}}</button></a>
+               </p>
               {% endfor %}
-            </select>
+            </div>
           </div>
           <div class="d-sm-flex align-items-center mt-5">
-            <button class="btn btn-primary btn-animated mr-sm-3 mb-3 mb-sm-0"><i class="las la-shopping-cart mr-2"></i>Add To Cart</button>
-            <a class="btn btn-animated btn-dark" href="#"> <i class="lar la-heart mr-2 ic-1-2x"></i>Add To Wishlist
+            <a href="{% url 'cart' details.slug active_size.size %}?return_url={{request.get_full_path}}" class="btn btn-primary btn-animated mr-sm-3 mb-3 mb-sm-0"><i class="las la-shopping-cart mr-2"></i>Add To Cart</a>
+            <a class="btn btn-animated btn-dark" href=""> <i class="lar la-heart mr-2 ic-1-2x"></i>Add To Wishlist
             </a>
           </div>
           
@@ -323,32 +321,6 @@
     </div>
   </div>
 </section>
-
-<!--tab end-->
-<!--multi sec start-->
-    
-    <section class="bg-pink py-9 position-relative overflow-hidden">
-      <div class="container">
-        <div class="row justify-content-center text-center mb-1">
-          <div class="col-lg-6 col-md-10">
-            <div class="mb-4">
-              <h2 class="mb-0">Be the first and get weekly updates</h2>
-            </div>
-            <div class="subscribe-form">
-              <form id="mc-form" class="row align-items-center no-gutters mb-3">
-                <div class="col">
-                  <input value="" name="EMAIL" class="email form-control input-2 bg-white" id="mc-email" placeholder="Email Address" required type="email">
-                </div>
-                <div class="col-auto">
-                  <input class="btn dark-btn overflow-auto" name="subscribe" value="Subscribe" type="submit">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--multi sec end--> 
 
 </div>
 {% endblock body %}

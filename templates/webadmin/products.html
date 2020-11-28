@@ -1,0 +1,107 @@
+{% extends 'webadmin/base.html' %}
+{% block title %}
+All Products
+{% endblock title %}
+{% load static %}
+{% load custom_tags %}
+{% block body %}
+
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>All Products</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+    {% comment %}
+    <div class="alert alert-gradient alert-{{message.tags}} mb-4" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg> ... </svg></button>
+    <strong>{{message}}</strong>
+    </div> 
+     {% endcomment %}
+    
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+        
+            <div class="layout-px-spacing">
+            {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" style="width:60%; margin-top:50px;">
+  <strong>{{message}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-table-two">
+
+                            <div class="widget-heading">
+                                <h5 class="">All Products</h5>
+                            </div>
+
+                            <div class="widget-content">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th><div class="th-content">Name</div></th>
+                                                <th><div class="th-content">Brand</div></th>
+                                                <th><div class="th-content">Colors</div></th>
+                                                <th><div class="th-content th-heading">Ideal</div></th>
+                                                <th><div class="th-content">Occassions</div></th>
+                                                <th><div class="th-content">Min. Price</div></th>
+                                                <th><div class="th-content">Status</div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in prod %}
+                                            <tr>
+                                                <td><div class="td-content customer-name"> {{i.name|title}}</div></td>
+                                                <td><div class="td-content product-brand">{{i.brand}}</div></td>
+                                                <td><div class="td-content">{{i.color}}</div></td>
+                                                <td><div class="td-content pricing"><span class="">{{i.ideal}}</span></div></td>
+                                                <td><div class="td-content pricing"><span class="">{{i.occassion}}</span></div></td>
+                                                <td><div class="td-content pricing"><span class="">Rs. {% prices i %}</span></div></td>
+                                                <td class="text-center">
+                                                        <ul class="table-controls">
+                                                            <li><a href="{% url 'edit_product' i.id %}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                            <li><a href="{% url 'delete_product' i.id %}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>
+                                                        </ul>
+                                                    </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Developed By <a target="_blank" href="#">Shivam Rohilla</a>, All rights reserved.</p>
+                </div>
+                <div class="footer-section f-section-2">
+                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                </div>
+            </div>
+        </div>
+        <!--  END CONTENT PART  -->
+
+    <!-- END MAIN CONTAINER -->
+{% include 'webadmin/footer.html' %}
+{% endblock body %}

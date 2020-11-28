@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Admin | Login </title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/form-1.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/theme-checkbox-radio.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/switches.css' %}">
+</head>
+<body class="form">
+{% load crispy_forms_tags %}
+    <div class="form-container">
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
+
+                        <h1 class="">Hello, <a href="index.html"><span class="brand-name">Sir</span></a></h1>
+                        <p class="signup-link">I Know It's You <a href="#">But this password is important for your protection !!</a></p>
+                        <form class="text-left" action="/admin_login/" method="post">
+                        {% csrf_token %}
+                            <div class="form">
+{{form|crispy}}
+                                <div class="d-sm-flex justify-content-between">
+                                    <div class="field-wrapper">
+                                        <button type="submit" class="btn btn-primary" value="">Log In</button>
+                                    </div>                                    
+                                </div>
+
+                            </div>
+                        </form>                        
+                        <p class="terms-conditions">Developed By <a href="#">Shivam Rohilla</a>.</p>
+
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="form-image">
+            <div class="l-image">
+            </div>
+        </div>
+    </div>
+
+    
+{% include 'webadmin/footer.html' %}
+</body>
+</html>

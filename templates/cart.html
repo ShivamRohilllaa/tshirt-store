@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}
+Cart
+{% endblock title %}
+{% block body %}
+{% load custom_tags %}
+
+<section class="bg-light py-6">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="h2 mb-0">Cart</h1>
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-md-end bg-transparent p-0 m-0">
+            <li class="breadcrumb-item"><a class="link-title" href="#">Home</a>
+            </li>
+            <li class="breadcrumb-item"><a class="link-title" href="#">Shop</a></li>
+            <li class="breadcrumb-item active text-primary" aria-current="page">Cart</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+
+<!--hero section end--> 
+
+
+<!--body content start-->
+
+<div class="page-content">
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-responsive">
+          <table class="cart-table table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Price</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Sale Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in cart %}
+              <tr>
+                <td>
+                  <div class="cart-thumb media align-items-center">
+                      <img class="img-fluid" src="{{i.tshirt.image1.url}}" alt="">
+                    <div class="media-body ml-3">
+                      <div class="product-title mb-2"><a class="link-title" href="#">{{i.tshirt.name}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td> <span class="product-price">{{i.size.size}}</span>
+                </td>
+                <td> <span class="product-price text-muted">Rs. {{i.size.price}}</span>
+                </td>
+                <td> <span class="product-price text-red">{{i.tshirt.discount}}%</span>
+                </td>
+                <td> <span class="product-price">Rs. {% sale_price i.size.price i.tshirt.discount as total_sale_price %} {{total_sale_price}}</span>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <button class="btn-product btn-product-up"> <i class="las la-minus"></i>
+                    </button>
+                    <input class="form-product" type="number" name="form-product" value="{{i.quantity}}">
+                    {% comment %} <a href="{% url 'add_cart' i.slug i.size %}?return_url={{request.get_full_path}}" class="btn-product btn-product-down"> <i class="las la-plus"></i>
+                    </a> {% endcomment %}
+                    <button href="" class="btn-product btn-product-down"> <i class="las la-plus"></i>
+                    </button>
+                  </div>
+                </td>
+                <td> <span class="product-price text-primary font-w-6">Rs. {% multiply total_sale_price i.quantity %}</span>
+                  <a href="#" class="close-link"><i class="las la-times"></i></a>
+                </td>
+              </tr>    
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+      <div class="col-lg-12 pl-lg-12 mt-8 mt-lg-0">
+        <div class="border rounded p-5 bg-light-4">
+          <h4 class="text-black text-left mb-2 font-w-6">Cart Totals</h4>
+          <div class="d-flex justify-content-between align-items-center pt-3 mb-5"> <span class="text-dark h5">Total</span>  <span class="text-dark font-w-6 h5">Rs. {{cart|cart_total_price}}</span> 
+          </div> <a class="btn btn-primary btn-animated btn-block" href="{% url 'checkout' %}">Proceed To Checkout</a>
+          <a class="btn btn-dark btn-animated mt-3 btn-block" href="#">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-md-flex align-items-end justify-content-between py-5 px-5 mt-5 bg-light-4">
+          <div>
+            <label class="text-black h4" for="coupon">Coupon</label>
+            <p>Enter your coupon code if you have one.</p>
+            <div class="row form-row">
+              <div class="col">
+                <input class="form-control" id="coupon" placeholder="Coupon Code" type="text">
+              </div>
+              <div class="col col-auto">
+                <button class="btn btn-dark btn-animated">Apply Coupon</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-animated mt-3 mt-md-0">Update Cart</button>
+        </div>
+  </div>
+</section>
+{% endblock body %}
+
+
+ 

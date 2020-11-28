@@ -1,0 +1,63 @@
+{% extends 'webadmin/base.html' %}
+{% block title %}
+Add Occassion
+{% endblock title %}
+{% load static %}
+{% load custom_tags %}
+{% block body %}
+{% load crispy_forms_tags %}
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Add Occassion</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+        <div class="container">
+        <div class="mx-auto" style="margin-top:50px; padding-bottom:100px;">
+        <div class="col-lg-10">
+                        <h1 class="">Add <a href="index.html"><span class="brand-name">Occassion</span></a></h1>
+
+                        <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="form">
+                            {{occassion|crispy}}
+                                <div class="d-sm-flex justify-content-between" style="margin-bottom:100px;">
+                                    <div class="field-wrapper">
+                                        <button type="submit" class="btn btn-primary" value="">Add Occassion</button>
+                                    </div>    
+                                    </div>                                
+        </div>
+        
+        </div>
+          
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Developed By <a target="_blank" href="#">Shivam Rohilla</a>, All rights reserved.</p>
+                </div>
+                <div class="footer-section f-section-2">
+                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                </div>
+            </div>
+        </div>
+        <!--  END CONTENT PART  -->
+
+    <!-- END MAIN CONTAINER -->
+{% include 'webadmin/footer.html' %}
+{% endblock body %}

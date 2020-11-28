@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Admin | {% block title %}
+    {% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link href="{% static 'css/loader.css' %}" rel="stylesheet" type="text/css" />
+    {% comment %} <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" /> {% endcomment %}
+    <link href="{% static 'css/table-basic.css' %}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'js/loader.js' %}"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %} " rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'css/apexcharts.css' %} " rel="stylesheet" type="text/css">
+    <link href="{% static 'css/dash_2.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/dash_1.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/alert.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/form-1.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/theme-checkbox-radio.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/switches.css' %}">
+    
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<style>
+body{overflow-x:hidden;}
+.alert-success {
+    color: #fff;
+    background-color: #1b55e2;
+    border-color: #7579ff !important;
+    background-image: linear-gradient(to right, #7579ff 0%, #b224ef 100%);
+}
+</style>
+</head>
+
+<body>
+
+
+{% include 'webadmin/header.html' %}
+    <!--  END NAVBAR  -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        {% include 'webadmin/sidebar.html' %}
+{% block body %}
+
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+{% include 'webadmin/footer.html' %}
+{% endblock body %}
