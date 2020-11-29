@@ -124,8 +124,6 @@ def signup(request):
             user.email = user.username
             user.save()
             return render(request, 'signup.html')
-
-
     context = {'form':form}
     return render(request, 'signup.html', context)
 
@@ -316,10 +314,10 @@ def validate_payment(request):
     print(payment_request_id,payment_id)
     response = API.payment_request_payment_status(payment_request_id, payment_id)
     print(response)
-    status = response.get('payment_status').get('payment').get('status')
-    # print(status)
+    status = response.get('payment_request').get('payment').get('status')
+    print(status)
 
-    if status is not "Failed":
+    if status != "Failed":
         print('Payment Success')
         try:
             payments = Payment.objects.get(payment_request_id=payment_request_id)
@@ -327,21 +325,25 @@ def validate_payment(request):
             payments.payment_status = status
             payments.save()
 
-            finalorders = payments.order
+            finalorders = payments.Order
             finalorders.order_status = 'PLACED'
             finalorders.save()
             cart = []
             request.session['cart'] = cart
             Cart.objects.filter(user=user).delete()
         except:
-            pass    
+            return render(request, 'payment_failed.html')
 
     else:
-        pass    
+        return render(request, 'payment_failed.html')    
     return redirect(orders)
 
+@login_required
 def orders(request):
-    return HttpResponse("Your Order is placed Successfully !!")    
+    user = request.user
+    orders = order.objects.filter(user=user).order_by('-date').exclude(order_status='PENDING')
+    context = {'order':orders}
+    return render(request, 'orders.html', context)    
 
 
 @login_required(login_url='/admin_login/')

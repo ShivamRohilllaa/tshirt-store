@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block style %}
+input[type="button"] {
+    margin-top: 20px;
+}
+.node {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display:inline-block;
+    transition: all 1000ms ease;
+}
+
+.activated {
+    box-shadow: 0px 0px 3px 2px rgba(194, 255, 194, 0.8);
+}
+
+.divider {
+    height: 40px;
+    width: 2px;
+    margin-left: 4px;
+    transition: all 800ms ease;
+}
+
+li p {
+    display:inline-block;
+    margin-left: 25px;
+}
+
+li {
+    list-style: none;
+    line-height: 1px;
+}
+
+
+.blue { background-color: rgba(82, 165, 255, 1); }
+.green{ background-color: rgba(92, 184, 92, 1) }
+.red { background-color: rgba(255, 148, 148, 1); }
+.grey { background-color: rgba(201, 201, 201, 1); }
+{% endblock style %}
+{% block body %}
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+
+<table class="table table-hover">
+  <h2>Your Orders</h2>
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Products</th>      
+      <th scope="col">Status</th>      
+      <th scope="col">Payment Method</th>      
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in order %}
+    <tr>
+      <td>{{i.date|date:"D, d M, Y"}}</td>
+      <td>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>S.NO</th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for oi in i.order_item_set.all %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td><img height="60px" src="{{oi.tshirt.image1.url}}" alt="" style="border-radius:50%;"></td>
+                                <td>{{oi.tshirt.name}}</td>
+                                <td>Rs. {{oi.price}}</td>
+                                <td>x {{oi.quantity}} qty </td>
+                                <td>{% multiply oi.quantity oi.price as result %} Rs. {{result}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>    
+                {% comment %} {% if i.order_status == "PLACED"%}
+                <td><span class="badge badge-primary">Your Order Is Placed</span></td>
+                {% elif i.order_status == "PACKED" %}
+                <td><span class="badge badge-info">Your Order Is Packed</span></td>
+                {% elif i.order_status == "SHIPPED" %}
+                <td><span class="badge badge-success">Your Order Is Ready For Shipping</span></td>
+                {% endif %}
+               {% endcomment %}
+                 {% if i.order_status == "PLACED"%}
+                <td>
+                <ul id="progress">
+    <li><div class="node green"></div><p><strong> Your Order Is Placed</strong></p></li>
+    <li><div class="divider blue"></div></li>
+    <li><div class="node grey"></div><p>Your Order Is Packed</p></li>
+    <li><div class="divider grey"></div></li>
+    <li><div class="node grey"></div><p>Your Order Is Ready For Shipping</p></li>
+    {% comment %} <li><div class="divider grey"></div></li> {% endcomment %}
+</ul>
+                </td>
+                {% elif i.order_status == "PACKED"%}
+                <td>
+                                <ul id="progress">
+    <li ><div class="node green"></div><p> <strong> Your Order Is Placed</strong></p></li>
+    <li><div class="divider blue"></div></li>
+    <li><div class="node green"></div><p><strong>Your Order Is Packed</strong></p></li>
+    <li><div class="divider blue"></div></li>
+    <li><div class="node grey"></div><p>Your Order Is Ready For Shipping</p></li>
+    {% comment %} <li><div class="divider grey"></div></li> {% endcomment %}
+</ul>
+                </td>
+                {% elif i.order_status == "SHIPPED"%}
+                <td>
+                                <ul id="progress">
+    <li><div class="node green"></div><p><strong>Your Order Is Placed</strong></p></li>
+    <li><div class="divider blue"></div></li>
+    <li><div class="node green"></div><p><strong>Your Order Is Packed</strong></p></li>
+    <li><div class="divider blue"></div></li>
+    <li><div class="node green"></div><p><strong>Your Order Is Ready For Shipping</strong></p></li>
+    {% comment %} <li><div class="divider grey"></div></li> {% endcomment %}
+</ul>
+                </td>
+                {% endif %}
+                
+                {% if i.payment_method == "ONLINE"%}
+                <td><span class="btn btn-sm btn-success disabled">By Card</span></td>  
+                {% elif i.payment_method == "COD"%}
+                <td><span class="badge badge-success">Cash On Delivery</span></td>                
+                {% endif %}
+              
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+</div>
+</div>
+{% endblock body %}

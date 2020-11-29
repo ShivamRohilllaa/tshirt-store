@@ -71,9 +71,10 @@ class Cart(models.Model):
 class order(models.Model):
     orderStatus = (
         ('PENDING', "Pending"),
-        ('PLACED', "Placed"),
-        ('CANCELED', "Canceled"),
-        ('COMPLETED', "Completed"),
+        ('PLACED', "Your Order Is Placed"),
+        ('CANCELED', "Your Order Is Canceled"),
+        ('PACKED', "Your Order Is Packed"),
+        ('SHIPPED', "Your Order Is Ready For Shipping"),
     )
     method = (
         ('COD', "Cod"),

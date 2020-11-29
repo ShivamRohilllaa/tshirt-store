@@ -27,7 +27,7 @@ window.location.href='/'
         </div>
       <div class="col-lg-12 col-md-12 ml-auto mr-auto p-0">
         <div class="register-form text-center">
-          <form method="post" action="/usersignup/">
+          <form method="post" action="{% url 'signup' %}">
           {% csrf_token %}
             {{form|crispy}}
                 <input type="submit" class="btn btn-success" value="Create Account">

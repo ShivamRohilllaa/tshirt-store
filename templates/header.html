@@ -57,7 +57,7 @@
                   <div class="cart_box dropdown-menu dropdown-menu-right">
                     <ul class="cart_list">
                       <li><a href="{% url 'profile' %}"><i class="las la-user"></i> {{request.user.first_name}} </a></li>
-                      <li><a href="#"><i class="las la-shopping-bag"></i> Orders</a> </li>
+                      <li><a href="{% url 'orders' %}"><i class="las la-shopping-bag"></i> Orders</a> </li>
                     </ul>
                     <div class="cart_footer">
                       <p class="cart_buttons">
