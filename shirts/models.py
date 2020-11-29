@@ -87,6 +87,11 @@ class order(models.Model):
     total = models.IntegerField(null=False)
     date = models.DateTimeField(null=False, auto_now_add=True)
 
+    def __str__(self):
+        return self.order_status
+
+
+
 class order_item(models.Model):
     Order = models.ForeignKey(order, on_delete=models.CASCADE)
     tshirt = models.ForeignKey(Tshirt, on_delete=models.CASCADE)

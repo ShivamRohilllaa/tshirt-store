@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+
+<table class="table table-hover">
+  <h2>Your Profile</h2>
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>      
+      <th scope="col">Email</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{users.username}}</td>
+      <td>{{users.first_name}}</td>
+      <td>{{users.last_name}}</td>
+      <td>{{users.email}}</td>      
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-sm-flex align-items-center mt-5 mb-10">
+            <a href="{% url 'updateprofile' %}" class="btn btn-primary btn-animated mr-sm-3 mb-3 mb-sm-0"><i class="las la-user mr-2"></i>Edit Profile</a>
+          </div>
+
+</div>
+</div>
+</div>
+{% endblock body %}

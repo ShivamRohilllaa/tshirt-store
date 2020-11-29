@@ -135,3 +135,6 @@ MEDIA_URL = '/media/'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+API_KEY = 'test_4a98cbc198d6aecc9221a220c33'
+AUTH_TOKEN = 'test_83349eaf8421810c5533e40d00a'
