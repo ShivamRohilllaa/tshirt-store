@@ -319,7 +319,7 @@ def validate_payment(request):
     status = response.get('payment_status').get('payment').get('status')
     # print(status)
 
-    if status != "Failed":
+    if status is not "Failed":
         print('Payment Success')
         try:
             payments = Payment.objects.get(payment_request_id=payment_request_id)
