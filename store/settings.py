@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'utvlf2!vewq@+_wp4fsp@xp+ek1xg0uw*cc*o%)zwdqra&dh*g'
+SECRET_KEY = 'Your Secret Key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,5 +136,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-API_KEY = 'test_4a98cbc198d6aecc9221a220c33'
-AUTH_TOKEN = 'test_83349eaf8421810c5533e40d00a'
+API_KEY = 'Your API KEY'
+AUTH_TOKEN = 'Your AUTH_TOKEN'
