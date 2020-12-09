@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('contact/', views.contact, name='contact'),
     path('orders/', views.orders, name='orders'),
+    path('allprod/', views.allprod, name='all_prod'),
     
     #Custom Admin
     path('admin_login/', views.admin_login, name='admin_login'),
