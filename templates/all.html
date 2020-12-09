@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}
+All Products
+{% endblock title %}
+{% block body %}
+{% load custom_tags %}
+<!--hero section start-->
+{% load static %}
+<section class="bg-light py-6">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="h2 mb-0">All Products</h1>
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-md-end bg-transparent p-0 m-0">
+            <li class="breadcrumb-item"><a class="link-title" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item"><a class="link-title" href="#">Shop</a></li>
+            <li class="breadcrumb-item active text-primary" aria-current="page">All Products</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+
+<!--hero section end--> 
+
+
+<!--body content start-->
+
+<div class="page-content">
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-md-12 order-lg-1">
+        <div class="row mb-4 align-items-center">
+          <div class="col-md-5 mb-3 mb-md-0"> <span class="text-dark">Showing 1 to 12 of 30 total</span>
+          </div>
+        </div>
+        <div class="row">
+        {% for i in prod %}
+          <div class="col-lg-4 col-md-6 mb-5">
+            <div class="card product-card card--default rounded-0">
+                        <div class="sale-label">{{i.discount}}%</div>
+                        <a class="card-img-hover d-block" href="{% url 'product_detail' i.slug %}"> <img class="card-img-back" src="{{i.image1.url}}" alt="..."> <img class="card-img-front" src="{{i.image2.url}}" alt="..."> </a>
+                        <div class="card-info">
+                          <div class="card-body">
+                            <div class="product-title font-w-5"><a class="link-title" href="{% url 'product_detail' i.slug %}">{{i.name|title}}</a> </div>
+                            <div class="mt-1"> <span class="product-price text-pink"><del class="text-muted">Rs. {% prices i %}</del>Rs. {% discount i %}</span>
+                              <div class="star-rating"><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-transparent border-0">
+                            <div class="product-link d-flex align-items-center justify-content-center">
+                              <button class="btn-cart btn btn-pink mx-3" type="button"><i class="las la-shopping-cart mr-1"></i> Add to cart </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+          </div>
+          {% endfor %}
+        </div>
+        {%	include	"pagination.html"	with	page=products	%}        
+      </div>
+      <div class="col-lg-3 col-md-12 sidebar mt-8 mt-lg-0">
+      <form action="" id="filterform">
+        <div>
+          <div class="widget widget-categories mb-4 border rounded p-4">
+            <h5 class="widget-title mb-3">Brands</h5>
+            <select onchange="submitform()" name="prodbrand" class="form-control" id="brands" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in brand %}
+              <option
+              {% selected_attr request.GET.prodbrand i.slug %}
+               value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>
+            <h5 class="widget-title mb-3 my-3">Neck Type</h5>
+            <select onchange="submitform()" name="neck" class="form-control" id="neck" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in neck %}
+              <option {% selected_attr request.GET.neck i.slug %} value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>     
+            <h5 class="widget-title mb-3 my-3">Occassion</h5>
+            <select onchange="submitform()" name="occ" class="form-control" id="occassion" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in occ %}
+              <option {% selected_attr request.GET.occ i.slug %} value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>
+             <h5 class="widget-title mb-3 my-3">Sleeve Type</h5>
+            <select onchange="submitform()" name="sleeve" class="form-control" id="sleeve" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in sleeve %}
+              <option {% selected_attr request.GET.sleeve i.slug %} value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>
+             <h5 class="widget-title mb-3 my-3">Ideal</h5>
+            <select onchange="submitform()" name="ideal" class="form-control" id="Ideal" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in ideal %}
+              <option {% selected_attr request.GET.ideal i.slug %} value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>
+             <h5 class="widget-title mb-3 my-3">color</h5>
+            <select onchange="submitform()" name="prodcolor" class="form-control" id="color" aria-label="Default select example">
+              <option value="">Select</option>
+              {% for i in colors %}
+              <option {% selected_attr request.GET.prodcolor i.slug %} value="{{i.slug}}">{{i.title|title}}</option>
+              {% endfor %}
+            </select>
+          </div>          
+        <a class="btn btn-primary" href="{% url 'all_prod' %}" type="submit">Clear Filters</a>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+function submitform(){
+  document.getElementById('filterform').submit()
+}
+</script>
+{% endblock %}
