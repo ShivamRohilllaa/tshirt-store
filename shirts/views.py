@@ -29,6 +29,58 @@ def home(request):
     context = {'prod':products}
     return render(request, 'index.html', context)
 
+
+def allprod(request):
+    query = request.GET
+    products = []
+    products = Tshirt.objects.all()
+
+    prodbrand = query.get('prodbrand')
+    occ = query.get('occ')
+    prodcolor = query.get('color')
+    sleeve = query.get('sleeve')
+    neck = query.get('neck')
+    ideal = query.get('ideal')
+
+    if prodbrand !='' and prodbrand is not None:
+        products = products.filter(brand__slug=prodbrand)
+
+    if neck !='' and neck is not None:
+        products = products.filter(neck__slug=neck)
+    
+    if prodcolor !='' and prodcolor is not None:
+        products = products.filter(color__slug=prodcolor)
+    
+    if occ !='' and occ is not None:
+        products = products.filter(occassion__slug=occ)
+    
+    if sleeve !='' and sleeve is not None:
+        products = products.filter(sleeve__slug=sleeve)
+
+    if ideal !='' and ideal is not None:
+        products = products.filter(ideal__slug=ideal)
+  
+
+    occ = Occassion.objects.all()
+    sleeve = Sleeve_type.objects.all()
+    neck = Neck_type.objects.all()
+    ideal = Ideal_for.objects.all()
+    brands = brand.objects.all()
+    colors = color.objects.all()
+    paginator = Paginator(products, 6)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    context = {'prod':products, 'products':products, 'occ':occ, 'sleeve':sleeve, 'neck':neck, 'ideal':ideal, 'brand':brands, 'colors':colors, 'page':page }
+    return render(request, 'all.html', context)        
+
+
+
 def product_detail(request, slug):
     details = Tshirt.objects.get(slug=slug)
     size = request.GET.get('size')
