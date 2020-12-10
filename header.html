@@ -1,0 +1,90 @@
+{% load static %}
+<header class="site-header header-1">
+    <div class="header-top bg-dark-1 py-0">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12 d-flex align-items-center justify-content-between text-white">
+            <div class="d-md-flex align-items-center call-info">
+              <div class="d-flex align-items-center">
+                <div class="text-white offer-text"><small><span>Welcome</span> !!</small> </div>
+              </div>
+            </div>
+            <div class="d-none d-md-flex align-items-center">
+              <div class="social-icons">
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item"><a class="text-white" href="#"><i class="lab la-facebook-f"></i></a> </li>
+                  <li class="list-inline-item"><a class="text-white" href="#"><i class="lab la-twitter"></i></a> </li>
+                  <li class="list-inline-item"><a class="text-white" href="#"><i class="lab la-linkedin-in"></i></a> </li>
+                  <li class="list-inline-item"><a class="text-white" href="#"><i class="lab la-instagram"></i></a> </li>
+                  <li class="list-inline-item"><a class="text-white" href="#"><i class="lab la-pinterest-p"></i></a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="header-wrap">
+      <div class="container">
+        <div class="row"> 
+          <!--menu start-->
+          <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-light position-static"> <a class="navbar-brand logo" href="{% url 'home' %}"> <img class="img-fluid" src="{% static 'images/logo.png' %}" alt=""> </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto mr-auto">
+                  <li class="nav-item"> <a class="nav-link active" href="/">Home</a>
+                  </li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'all_prod' %}">All Products</a>                    
+                  </li>
+                  <li class="nav-item"> <a class="nav-link" href="/contact">Contact</a> </li>
+                  {% if user.is_authenticated %}
+<li class="nav-item"> </li>
+                {% else %}
+                  <li class="nav-item">
+                <a href="/userlogin" class="btn nav-link btn-sm btn-primary my-2 loginbtn767">Login</a>
+                <a href="/usersignup" class="btn nav-link btn-primary btn-sm my-2 loginbtn767">Signup</a>
+                </li>
+                {% endif %}
+                </ul>
+              </div>
+              <div class="right-nav align-items-center d-flex justify-content-end">
+                <div class="mr-1 mr-sm-3 search-block"> <a href="javascript:void(0);" class="search_trigger ml-3"><i class="las la-search"></i></a>
+                  <div class="search_wrap container"> <span class="close-search"><i class="ion-ios-close-empty"></i></span>
+                    <form>
+                      <input type="text" placeholder="Search" class="form-control" id="search_input">
+                      <button type="submit" class="search_icon"><i class="las la-search"></i></button>
+                    </form>
+                  </div>
+                </div>
+                {% if user.is_authenticated %}
+                                <div class="dropdown cart_dropdown"> <a class="d-flex align-items-center" href="#"> <span class="bg-white pr-2 pl-0 py-1 rounded"> <i class="las la-user"></i> </span> </a>
+                  <div class="cart_box dropdown-menu dropdown-menu-right">
+                    <ul class="cart_list">
+                      <li><a href="{% url 'profile' %}"><i class="las la-user"></i> {{request.user.first_name}} </a></li>
+                      <li><a href="{% url 'orders' %}"><i class="las la-shopping-bag"></i> Orders</a> </li>
+                    </ul>
+                    <div class="cart_footer">
+                      <p class="cart_buttons">
+                      <a href="{% url 'logout' %}" class="btn btn-primary view-cart ml-2 mr-2">Logout</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {% else %}
+                <a href="/userlogin" class="btn btn-sm btn-primary mx-1 loginbtn">Login</a>
+                <a href="/usersignup" class="btn btn-primary btn-sm mx-1 loginbtn">Signup</a>
+                {% endif %}
+                <a class="mr-3 d-none d-sm-inline" href="#">
+                 <i class="lar la-heart"></i>
+                </a>
+                <div class="dropdown cart_dropdown"> <a class="d-flex align-items-center" href="{% url 'cart_detail' %}"> <span class="bg-white pr-2 pl-0 py-1 rounded" data-cart-items="{{request.session.cart|length}}"> <i class="las la-shopping-bag"></i> </span> </a>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <!--menu end--> 
+        </div>
+      </div>
+    </div>
+  </header>
